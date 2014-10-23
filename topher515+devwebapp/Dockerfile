@@ -2,13 +2,17 @@ FROM topher515/devbase
 
 MAINTAINER Chris Wilcox <ckwilcox@gmail.com>
 
-RUN apt-get -y 
+
+WORKDIR /opt/app
+
 
 # Development
 
 # Build
-RUN apt-get install nodejs npm
-RUN npm install -g gulp gulp-concat gulp-less gulp-coffee
+RUN apt-get -y install curl
+RUN curl -sL https://deb.nodesource.com/setup | bash -
+RUN apt-get -y install nodejs npm
+RUN npm install gulp gulp-concat gulp-less gulp-coffee
 
 # Web app
 RUN pip install Flask sqlalchemy
@@ -19,9 +23,7 @@ RUN pip install Flask sqlalchemy
 # Useful
 RUN pip install supervisor
 
-VOLUME ["/opt/app"]
-
-WORKDIR /opt/app
+# VOLUME ["/opt/app"]
 
 #ADD static-lib
 #ADD static-src
