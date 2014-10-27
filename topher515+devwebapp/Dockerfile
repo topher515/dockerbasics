@@ -5,17 +5,28 @@ MAINTAINER Chris Wilcox <ckwilcox@gmail.com>
 
 WORKDIR /opt/app
 
+RUN apt-get -y install curl
+
+# Web app
+RUN pip install Flask sqlalchemy
 
 # Development
 
 # Build
-RUN apt-get -y install curl
 RUN curl -sL https://deb.nodesource.com/setup | bash -
 RUN apt-get -y install nodejs npm
-RUN npm install gulp gulp-concat gulp-less gulp-coffee
+RUN npm install -g gulp 
+# http://stackoverflow.com/questions/22115400/why-do-we-need-to-install-gulp-globally-and-locally
 
-# Web app
-RUN pip install Flask sqlalchemy
+WORKDIR /opt/
+RUN npm install gulp 
+RUN npm install gulp-less 
+RUN npm install gulp-concat
+RUN npm install gulp-coffee
+RUN npm install gulp-imagemin
+RUN npm install del
+WORKDIR /opt/app
+
 
 # Database
 # TODO
@@ -23,13 +34,6 @@ RUN pip install Flask sqlalchemy
 # Useful
 RUN pip install supervisor
 
-# VOLUME ["/opt/app"]
-
-#ADD static-lib
-#ADD static-src
-#ADD templates
-#ADD webapp
-#ADD gulpfile.js
-#ADD runserver.py
+VOLUME ["/opt/app"]
 
 EXPOSE 8080

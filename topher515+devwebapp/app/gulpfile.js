@@ -52,7 +52,7 @@ gulp.task('external-scripts', ['clean'], function() {
   return gulp.src(paths.externalScripts)
     .pipe(gulp.dest('build/js'));
 });
-gulp.task('external-img', ['clean'], function() {
+gulp.task('external-images', ['clean'], function() {
   return gulp.src(paths.externalImages)
     .pipe(gulp.dest('build/img'));
 });

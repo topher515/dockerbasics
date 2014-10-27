@@ -1,5 +1,4 @@
-docker run -P -v $(pwd)/app:/opt/app -t -i topher515/devwebapp:latest node_modules/.bin/gulp
-sshfs -p 2022 docker@localhost:/shared /opt/app
+docker run -P -v $(pwd)/app:/opt/app -t -i topher515/devwebapp:latest /opt/node_modules/.bin/gulp
 
 
 # More research: https://github.com/docker/docker/issues/4023
